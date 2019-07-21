@@ -1,0 +1,86 @@
+#define NOTE_G6 1568
+#define NOTE_F6 1397
+#define NOTE_DS6 1245 
+
+int potmeter = A0;
+int potvalue = 0;
+int ten_xp = 13; 
+int twe_xp = 12; 
+int thi_xp = 11; 
+int fou_xp = 10; 
+int fif_xp = 9; 
+int six_xp = 7; 
+int sev_xp = 6; 
+int eig_xp = 5; 
+int nin_xp = 4; 
+int hun_xp = 3;
+
+int melody[] = {
+  NOTE_G6, NOTE_G6, NOTE_G6, NOTE_G6, NOTE_DS6, NOTE_F6, NOTE_G6, NOTE_F6, NOTE_G6
+};
+
+int noteDurations[] = {
+  8, 8, 8, 2, 2, 2, 5, 5, 2
+};
+
+void setup() {
+  pinMode(ten_xp, OUTPUT);
+  pinMode(twe_xp, OUTPUT);
+  pinMode(thi_xp, OUTPUT);
+  pinMode(fou_xp, OUTPUT);
+  pinMode(fif_xp, OUTPUT);
+  pinMode(six_xp, OUTPUT);
+  pinMode(sev_xp, OUTPUT);
+  pinMode(eig_xp, OUTPUT);
+  pinMode(nin_xp, OUTPUT);
+  pinMode(hun_xp, OUTPUT);
+
+
+}
+
+void loop() {
+  potvalue = analogRead(potmeter);
+  
+  if (potvalue > 0){
+    digitalWrite(ten_xp, HIGH);
+  }
+  if (potvalue > 102){
+    digitalWrite(twe_xp, HIGH);
+  }
+  if (potvalue > 204){
+    digitalWrite(thi_xp, HIGH);
+  }
+  if (potvalue > 306){
+    digitalWrite(fou_xp, HIGH);
+  }
+  if (potvalue > 408){
+    digitalWrite(fif_xp, HIGH);
+  }
+  if (potvalue > 510){
+    digitalWrite(six_xp, HIGH);
+  }
+  if (potvalue > 612){
+    digitalWrite(sev_xp, HIGH);
+  }
+  if (potvalue > 714){
+    digitalWrite(eig_xp, HIGH);
+  }
+  if (potvalue > 816){
+    digitalWrite(nin_xp, HIGH);
+  }
+  if (potvalue > 918){
+    digitalWrite(hun_xp, HIGH);
+    for (int thisNote = 0; thisNote < 9; thisNote++) {
+
+      int noteDuration = 1000 / noteDurations[thisNote];
+      tone(8, melody[thisNote], noteDuration);
+
+      int pauseBetweenNotes = noteDuration * 1.20;
+      delay(pauseBetweenNotes);
+
+      noTone(8);
+  }
+  }
+
+  delay(1000);
+}
